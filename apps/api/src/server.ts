@@ -4,7 +4,6 @@ import multipart from '@fastify/multipart';
 import fastifyStatic from '@fastify/static';
 import path from 'path';
 import fs from 'fs';
-import puppeteer from 'puppeteer';
 import { prisma } from './prisma';
 import { renderDocumentHTML } from './pdfTemplate';
 
@@ -494,37 +493,7 @@ async function main() {
 
     const htmlContent = renderDocumentHTML(companyForPdf, type, data);
 
-    if (htmlOnly) {
-      reply.header('Content-Type', 'text/html');
-      return reply.send(htmlContent);
-    }
-
-    try {
-      if (puppeteer) {
-        const browser = await puppeteer.launch({
-          headless: true,
-          args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        });
-        const page = await browser.newPage();
-        await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
-
-        const pdfBuffer = await page.pdf({
-          format: 'A4',
-          printBackground: true,
-          margin: { top: '0px', bottom: '0px', left: '0px', right: '0px' },
-        });
-
-        await browser.close();
-
-        reply.header('Content-Type', 'application/pdf');
-        reply.header('Content-Disposition', `attachment; filename="${data.number || 'document'}.pdf"`);
-        return reply.send(pdfBuffer);
-      }
-    } catch (e) {
-      console.warn('Puppeteer launch fallback to HTML response', e);
-    }
-
-    // Fallback: return rendered HTML if PDF engine is unavailable
+    // Return rendered HTML (PDF generation is handled on the client side)
     reply.header('Content-Type', 'text/html');
     return reply.send(htmlContent);
   });
