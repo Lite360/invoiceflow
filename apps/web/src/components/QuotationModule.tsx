@@ -150,30 +150,38 @@ export const QuotationModule: React.FC<QuotationModuleProps> = ({
               <p className="text-xs text-slate-500">Official commercial estimate with branding</p>
             </div>
           </div>
-          <div className="flex items-center space-x-3">
+          <div className="flex flex-wrap items-center gap-2 md:gap-3 w-full md:w-auto">
             <button
               type="button"
               onClick={handleConvertToInvoice}
-              className="flex items-center space-x-1.5 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-xl shadow-md transition"
+              className="flex-1 md:flex-none flex items-center justify-center space-x-1.5 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-xl shadow-md transition"
             >
               <RefreshCw className="w-4 h-4" />
-              <span>Convert to Invoice</span>
+              <span className="hidden sm:inline">Convert to Invoice</span>
+              <span className="sm:hidden">Convert</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => handleSave('Draft')}
+              className="flex-1 md:flex-none px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold rounded-xl transition text-center"
+            >
+              Save Draft
             </button>
             <button
               type="button"
               onClick={() => onPreview('Quotation', formData)}
-              className="flex items-center space-x-1.5 px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white text-sm font-semibold rounded-xl transition"
+              className="flex-1 md:flex-none flex items-center justify-center space-x-1.5 px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white text-sm font-semibold rounded-xl transition"
             >
               <Eye className="w-4 h-4" />
-              <span>Preview A4</span>
+              <span>Preview</span>
             </button>
             <button
               type="button"
-              onClick={() => handleSave('Pending')}
-              className="flex items-center space-x-1.5 px-5 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-bold rounded-xl shadow-lg shadow-purple-600/30 transition"
+              onClick={() => handleSave('Issued')}
+              className="w-full md:w-auto flex items-center justify-center space-x-1.5 px-5 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-bold rounded-xl shadow-lg shadow-purple-600/30 transition"
             >
               <Save className="w-4 h-4" />
-              <span>{loading ? 'Saving...' : 'Save & Print PDF'}</span>
+              <span>{loading ? 'Saving...' : 'Issue Quotation'}</span>
             </button>
           </div>
         </div>

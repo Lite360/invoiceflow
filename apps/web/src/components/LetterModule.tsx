@@ -109,22 +109,29 @@ export const LetterModule: React.FC<LetterModuleProps> = ({ company, onPreview }
               <p className="text-xs text-slate-500">Auto-formatted with branded company letterhead</p>
             </div>
           </div>
-          <div className="flex items-center space-x-3">
+          <div className="flex flex-wrap items-center gap-2 md:gap-3 w-full md:w-auto">
             <button
               type="button"
-              onClick={() => onPreview('Letter', formData)}
-              className="flex items-center space-x-1.5 px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white text-sm font-semibold rounded-xl transition"
+              onClick={() => handleSave('Draft')}
+              className="flex-1 md:flex-none px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold rounded-xl transition text-center"
             >
-              <Eye className="w-4 h-4" />
-              <span>Preview A4</span>
+              Save Draft
             </button>
             <button
               type="button"
-              onClick={handleSave}
-              className="flex items-center space-x-1.5 px-5 py-2 bg-amber-600 hover:bg-amber-700 text-white text-sm font-bold rounded-xl shadow-lg shadow-amber-600/30 transition"
+              onClick={() => onPreview('Letter', formData)}
+              className="flex-1 md:flex-none flex items-center justify-center space-x-1.5 px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white text-sm font-semibold rounded-xl transition"
+            >
+              <Eye className="w-4 h-4" />
+              <span>Preview</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => handleSave('Issued')}
+              className="w-full md:w-auto flex items-center justify-center space-x-1.5 px-5 py-2 bg-amber-600 hover:bg-amber-700 text-white text-sm font-bold rounded-xl shadow-lg shadow-amber-600/30 transition"
             >
               <Save className="w-4 h-4" />
-              <span>{loading ? 'Saving...' : 'Generate Letter PDF'}</span>
+              <span>{loading ? 'Saving...' : 'Issue Letter'}</span>
             </button>
           </div>
         </div>
