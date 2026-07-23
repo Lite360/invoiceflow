@@ -113,8 +113,9 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
     <div className="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto no-print">
       <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[92vh] flex flex-col overflow-hidden border border-slate-100">
         {/* Modal Header */}
-        <div className="px-6 py-4 bg-slate-900 text-white flex items-center justify-between border-b border-slate-800">
-          <div className="flex items-center space-x-3">
+        <div className="px-6 py-4 bg-slate-900 text-white flex flex-col md:flex-row md:items-center justify-between border-b border-slate-800 gap-4">
+          <div className="flex items-center justify-between md:justify-start w-full md:w-auto">
+            <div className="flex items-center space-x-3">
             <div className="p-2 bg-blue-600/20 text-blue-400 rounded-lg">
               <FileText className="w-5 h-5" />
             </div>
@@ -122,11 +123,12 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
               <h3 className="font-semibold text-lg">{type} Preview</h3>
               <p className="text-xs text-slate-400"># {data.number}</p>
             </div>
+            {/* Move X button out of this flex group on mobile, or just wrap buttons */}
           </div>
-          <div className="flex items-center space-x-3">
+          <div className="flex flex-wrap items-center gap-2">
             <button
               onClick={handlePrint}
-              className="flex items-center space-x-1.5 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-medium rounded-lg transition"
+              className="flex items-center space-x-1.5 px-3 md:px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs md:text-sm font-medium rounded-lg transition"
             >
               <Printer className="w-4 h-4" />
               <span>Print</span>

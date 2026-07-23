@@ -110,7 +110,7 @@ export const InvoiceModule: React.FC<InvoiceModuleProps> = ({ company, onPreview
     <div className="space-y-8 max-w-5xl mx-auto">
       <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-200">
         {/* Module Header */}
-        <div className="flex items-center justify-between border-b border-slate-100 pb-6 mb-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-6 mb-8 gap-4">
           <div className="flex items-center space-x-3">
             <div className="p-3 bg-blue-50 text-blue-600 rounded-2xl">
               <FileSpreadsheet className="w-6 h-6" />
