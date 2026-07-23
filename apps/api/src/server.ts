@@ -13,17 +13,20 @@ import { put } from '@vercel/blob';
 
 // Ensure uploads folder exists (fallback for local development if needed)
 const uploadsDir = path.join(process.cwd(), 'uploads');
-if (!fs.existsSync(uploadsDir)) {
+if (!process.env.VERCEL && !fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
 }
 
 async function main() {
   await app.register(cors, { origin: '*' });
   await app.register(multipart, { limits: { fileSize: 10 * 1024 * 1024 } });
-  await app.register(fastifyStatic, {
-    root: uploadsDir,
-    prefix: '/uploads/',
-  });
+  
+  if (!process.env.VERCEL) {
+    await app.register(fastifyStatic, {
+      root: uploadsDir,
+      prefix: '/uploads/',
+    });
+  }
 
   // 1. Company Profile & Setup Wizard
   app.get('/api/company', async (req, reply) => {
