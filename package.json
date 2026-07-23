@@ -7,9 +7,9 @@
     "dev:api": "npm run dev --prefix apps/api",
     "dev:web": "npm run dev --prefix apps/web",
     "db:push": "npx prisma db push",
-    "postinstall": "npx prisma generate && npx prisma db push",
+    "postinstall": "npx prisma generate && npx prisma db push --accept-data-loss",
     "build": "npm run build:web && npm run build:api",
-    "build:web": "npm run build --prefix apps/web",
+    "build:web": "npm run build --prefix apps/web && rm -rf public && cp -r apps/web/dist public",
     "build:api": "tsc -p apps/api/tsconfig.json"
   },
   "devDependencies": {
