@@ -116,14 +116,20 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
         <div className="px-6 py-4 bg-slate-900 text-white flex flex-col md:flex-row md:items-center justify-between border-b border-slate-800 gap-4">
           <div className="flex items-center justify-between md:justify-start w-full md:w-auto">
             <div className="flex items-center space-x-3">
-            <div className="p-2 bg-blue-600/20 text-blue-400 rounded-lg">
-              <FileText className="w-5 h-5" />
+              <div className="p-2 bg-blue-600/20 text-blue-400 rounded-lg">
+                <FileText className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg">{type} Preview</h3>
+                <p className="text-xs text-slate-400"># {data.number}</p>
+              </div>
             </div>
-            <div>
-              <h3 className="font-semibold text-lg">{type} Preview</h3>
-              <p className="text-xs text-slate-400"># {data.number}</p>
-            </div>
-            {/* Move X button out of this flex group on mobile, or just wrap buttons */}
+            <button
+              onClick={onClose}
+              className="md:hidden p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition"
+            >
+              <X className="w-5 h-5" />
+            </button>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <button
@@ -142,7 +148,7 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
             </button>
             <button
               onClick={onClose}
-              className="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition"
+              className="hidden md:block p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition"
             >
               <X className="w-5 h-5" />
             </button>

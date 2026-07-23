@@ -76,13 +76,13 @@ export const LetterModule: React.FC<LetterModuleProps> = ({ company, onPreview }
     }));
   };
 
-  const handleSave = async () => {
+  const handleSave = async (status: string = 'Final') => {
     setLoading(true);
     try {
       const res = await fetch('/api/letters', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, status }),
       });
       const data = await res.json();
       if (data.id) {

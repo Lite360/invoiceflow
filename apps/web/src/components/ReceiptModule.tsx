@@ -38,13 +38,13 @@ export const ReceiptModule: React.FC<ReceiptModuleProps> = ({ company, onPreview
     }
   };
 
-  const handleSave = async () => {
+  const handleSave = async (status: string = 'Paid') => {
     setLoading(true);
     try {
       const res = await fetch('/api/receipts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, status }),
       });
       const data = await res.json();
       if (data.id) {
